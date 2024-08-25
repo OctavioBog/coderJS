@@ -1,31 +1,34 @@
 
 function getEdad() {
-  let edad = 0;
-  while (edad <= 0 || edad == NaN) {
-    edad = parseInt(prompt("ingresa tu edad. Recorda que debes ingresar un valor numérico"));
-    console.log(edad)
+  let edad = parseInt(prompt("ingresa tu edad. Recorda que debes ingresar un valor numérico"));
+
+  if(typeof Number && edad > 0){
+    return edad;
+  }else{
+    return getEdad();
   }
-  return edad;
 }
 
 function getPeso() {
-  let peso = 0;
-  while (peso <= 0 || peso == NaN) {
-    peso = parseInt(prompt("ingresa tu peso en kg. Recorda que debes ingresar un valor numérico"));
-  }
+  let peso = parseInt(prompt("ingresa tu peso en kg. Recorda que debes ingresar un valor numérico"));
 
-  return peso;
+  if(typeof Number && peso > 0){
+    return peso;
+  }else{
+    return getPeso();
+  }
   
 }
 
 function getAltura() {
   
-  let altura = 0;
-  while (altura <= 0 || altura == NaN) {
-    altura = parseInt(prompt("ingresa tu altura en cm. Recorda que debes ingresar un valor numérico"));
-  }
+  let altura = parseInt(prompt("ingresa tu altura en cm. Recorda que debes ingresar un valor numérico"));
 
-  return altura;
+  if(typeof Number && altura > 0){
+    return altura;
+  }else{
+    return getAltura();
+  }
 }
 
 function getActividad() {
@@ -86,40 +89,16 @@ function calorias(edad, peso, altura, actividad, genero) {
 
 
 const userEdad = getEdad();
+console.log(userEdad)
 const userPeso = getPeso();
+console.log(userPeso)
 const userAltura = getAltura();
+console.log(userAltura)
 const userActividad = getActividad();
+console.log(userActividad)
 const userGenero = getGenero();
+console.log(userGenero)
 
 
 let resultado = parseInt(calorias(userEdad, userPeso, userAltura, userActividad, userGenero));
 alert("calorias diarias para bajar de peso: " + resultado);
-
-
-
-
-
-
-
-
-
-
-
-
-
-// let edad = parseInt(prompt("ingresa tu edad"));
-// let peso = parseInt(prompt("ingresa tu peso en kg"));
-// let altura = parseInt(prompt("ingresa tu altura en cm"));
-// let actividad = parseFloat(prompt("ingresa el numero que corresponda:\n1.25 nada de actividad \n1.50 un poco de actividad\n1.75 actividad moderada\n 2 actividad muy intensa"));
-// let genero =(prompt("ingresa segun corresponda:\n 1 para masculino\n 2 para femenino"));
-
-// function calorias(edad, peso, altura, actividad,genero){
-//     switch(genero){
-//         case "1":
-//             return (66+(13.7*peso))+((5*altura)-(6.8*edad))*actividad;
-//         case "2":
-//             return (65+(9.6*peso))+((1.8*altura)-(4.7*edad))*actividad;
-//     }
-// }
-// let resultado = parseInt(calorias(edad,peso,altura,actividad,genero));
-// alert( "calorias diarias para bajar grasa corporal son: " + resultado)
