@@ -1,71 +1,107 @@
-function ingresarproductos() {
-    let productos = [];
-    let continuar = true;
 
-    while (continuar) {
-        const articulo = prompt("Ingresa el producto").toLowerCase();
-        
-        const productoExistente = productos.find(p => p.articulo === articulo);
-        if (productoExistente) {
-            alert("Este producto ya ha sido ingresado.");
-            continue;
-        }
-
-        const precio = parseFloat(prompt("Ingresa el precio del producto"));
-        if (isNaN(precio) || precio < 0) {
-            alert("Ingresa un precio válido");
-            continue;
-        }
-
-        productos.push({ articulo: articulo, precio: precio });
-
-        let respuesta = prompt("¿Desea agregar algún producto más? SI/NO").toLowerCase();
-        while (respuesta !== "si" && respuesta !== "no") {
-            alert("Respuesta inválida, por favor ingrese SI o NO.");
-            respuesta = prompt("¿Desea agregar algún producto más? SI/NO").toLowerCase();
-        }
-
-        if (respuesta === "no") {
-            continuar = false;
-        }
+let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+const productos = [
+    {
+        id: "Yerba CBSE",
+        img: "../img/file(1).png",
+        precio: 7,
+        titulo: "Yerba CBSE",
+        cantidad: 1,
+    },
+    {
+        id: "Yerba Union",
+        img: "../img/file(2).png",
+        precio: 6,
+        titulo: "Yerba Union",
+        cantidad: 1,
+    },
+    {
+        id: "Yerba Taragüi",
+        img: "../img/file.png",
+        precio: 5,
+        titulo: "Yerba Taragüi",
+        cantidad: 1,
     }
+];
 
-    return productos;
-}
+const contenedorProductos = document.querySelector("#productos");
+const carritovacio = document.querySelector("#carrito-vacio");
+const carritoproductos = document.querySelector("#carrito-productos");
+const carritototal = document.querySelector("#carrito-total");
 
-
-
-function cuotas(productos) {
-    const pagos = parseInt(prompt("Ingresa en cuántas cuotas quieres pagar. 1/3/6"));
-    const suma = productos.reduce((acc, producto) => acc + producto.precio, 0);
-    switch (pagos) {
-        case 1:
-            return suma;
-        case 3:
-            return suma / 3;
-        case 6:
-            return suma / 6;
-        default:
-            alert("Opción no válida. Mostrando el precio total.");
-            return suma;
-    }
+productos.forEach((producto) => {
+    let div = document.createElement("div");
+    div.innerHTML = `
+        <img src=${producto.img} alt="${producto.titulo}">
+        <h2>${producto.titulo}</h2>
+        <p>€${producto.precio}</p>
+    `;
     
-}
+    let button = document.createElement("button");
+    button.classList.add("button");
+    button.innerText = "Agregar al carrito";
 
-function mostrarResumen(productos) {
-    let resumen = "";
-    console.log('%c Resumen de la compra:' , 'color: red; font-weight: bold;');
-    productos.forEach(producto => {
-        resumen += `Producto: ${producto.articulo}, Precio: $${producto.precio.toFixed(2)}\n`;
+    button.addEventListener("click", () => {
+        agregaralcarrito(producto);
     });
 
-    const total = productos.reduce((acc, producto) => acc + producto.precio, 0);
-    resumen += `Total compra: $${total.toFixed(2)}`;
-    console.log(resumen);
+    div.append(button);
+    contenedorProductos.append(div);
+});
+
+function actualizarcarrito() {
+    if (carrito.length === 0) {
+        carritovacio.classList.remove("d-none");
+        carritoproductos.classList.add("d-none");
+        carritototal.innerText = "€0";
+    } else {
+        carritovacio.classList.add("d-none");
+        carritoproductos.classList.remove("d-none");
+        
+        carritoproductos.innerHTML = "";
+
+        carrito.forEach((producto) => {
+            let div = document.createElement("div");
+            div.classList.add("productos-car");
+            div.innerHTML = `
+                <h2>${producto.titulo}</h2>
+                <p>€${producto.precio}</p>
+                <p>Cantidad:${producto.cantidad}</p>
+                <p>subt:€${producto.cantidad * producto.precio}</p>
+            `;
+            let button = document.createElement("button");
+            button.innerText = "❌";
+            button.addEventListener("click", () => {
+                borrarcarrito(producto);
+            
+            })
+            div.append(button);
+            carritoproductos.append(div);
+        });
+
+        
+        let total = carrito.reduce((acc, item) => acc + item.precio * item.cantidad, 0);
+        carritototal.innerText = `€${total}`;
+    }
+    localStorage.setItem("carrito", JSON.stringify(carrito));
 }
 
-let productos = ingresarproductos();
-let totalCuota = cuotas(productos);
-mostrarResumen(productos);
-console.log(`%c Total a pagar por cuota: $${totalCuota.toFixed(2)}`,'color: red; font-weight: bold;');
+function agregaralcarrito(producto) {
+    let itemencontrado = carrito.find((item) => item.id === producto.id);
+    if (itemencontrado) {
+        itemencontrado.cantidad++;
+    } else {
+        carrito.push({ ...producto, cantidad: 1 });
+    }
 
+    actualizarcarrito();
+}
+    function borrarcarrito(producto) {
+    let indice = carrito.findIndex((item) => item.id === producto.id);
+    if (indice !== -1){
+        carrito.splice(indice,1);
+    }
+    actualizarcarrito();
+    
+    }
+    actualizarcarrito();
