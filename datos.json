@@ -1,6 +1,6 @@
 [
     {
-        "img": "./img/gomitasvariadas.png",
+        "img": "/img/gomitasvariadas.png",
         "id" : "Gomitas Variadas",
         "precio": 7,
         "titulo": "Variadas",
@@ -11,7 +11,7 @@
         "precio": 7,
         "titulo": "Bananas 250u",
         "cantidad": 1,
-        "img": "./img/065fe9583b3fe9919f6c6fb9a50f4ac8.png"
+        "img": "/img/065fe9583b3fe9919f6c6fb9a50f4ac8.png"
     },
     {
         "id": "Lenguas verdes",
@@ -25,20 +25,20 @@
         "precio": 4.80,
         "titulo": "Bananas 100u",
         "cantidad": 1,
-        "img": "./img/065fe9583b3fe9919f6c6fb9a50f4ac8.png"
+        "img": "/img/065fe9583b3fe9919f6c6fb9a50f4ac8.png"
     },
     {
         "id": "Ojos",
         "precio": 12,
         "titulo": "Ojos",
         "cantidad": 1,
-        "img": "./img/ojos-de-trolli-rellenos-45-unidades.png"
+        "img": "/img/ojos-de-trolli-rellenos-45-unidades.png"
     },
     {
         "id": "Lenguas rojas",
         "precio": 7,
         "titulo": "Lenguas 200u",
         "cantidad": 1,
-        "img": "./img/lenguas-verdes.png"
+        "img": "/img/lenguas-verdes.png"
     }
 ]
