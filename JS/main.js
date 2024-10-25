@@ -1,7 +1,7 @@
 let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
 
 async function dataproductos() {
-    let resp = await fetch("../datos.json");
+    let resp = await fetch("/datos.json");
     let data = await resp.json();
     return data;
 }
@@ -98,7 +98,7 @@ function actualizarcarrito() {
 
             let buttonaumentar = document.createElement("button");
             buttonaumentar.classList.add("button");
-            buttonaumentar.innerText = "⬆️";
+            buttonaumentar.innerText = "➕";
             buttonaumentar.addEventListener("click", () => {
                 aumentarcantidad(producto);
                 Toastify({
@@ -119,7 +119,7 @@ function actualizarcarrito() {
 
             let buttonreducir = document.createElement("button");
             buttonreducir.classList.add("button");
-            buttonreducir.innerText = "⬇️";
+            buttonreducir.innerText = "➖";
             buttonreducir.addEventListener("click", () => {
                 reducircantidad(producto);
             });
