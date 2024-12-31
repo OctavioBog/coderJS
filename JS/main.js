@@ -75,7 +75,7 @@ function actualizarcarrito() {
             button.classList.add("button");
             button.innerText = "❌";
             button.addEventListener("click", () => {
-                if (confirm(`¿Estás seguro de que deseas eliminar ${producto.titulo} del carrito?`)) {
+                
                     borrarcarrito(producto);
                     Toastify({
                         text: `${producto.titulo} ha sido eliminado del carrito.`,
@@ -90,7 +90,7 @@ function actualizarcarrito() {
                         },
                         onClick: function() {}
                     }).showToast();
-                }
+                
             });
             
             div.append(button);
@@ -164,7 +164,7 @@ function reducircantidad(producto) {
         item.cantidad--;
         actualizarcarrito();
     } else if (item && item.cantidad === 1) {
-        if (confirm(`¿Estás seguro de que deseas eliminar ${producto.titulo} del carrito?`)) {
+       
             borrarcarrito(producto);
             Toastify({
                 text: `${producto.titulo} ha sido eliminado del carrito.`,
@@ -179,7 +179,7 @@ function reducircantidad(producto) {
                 },
                 onClick: function() {}
             }).showToast();
-        }
+        
     }
 }
 
